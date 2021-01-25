@@ -1,5 +1,5 @@
         global  _ft_write
-        extern __error
+        extern ___error
         section .text
 
 _ft_write:

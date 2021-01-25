@@ -1,0 +1,65 @@
+
+section  .text
+    global _written
+
+_written:
+        push rdi
+        mov rax, 0x02000004  
+        mov rdi,1
+        mov rsi, message
+        ;pop rsi,
+        mov rdx ,10
+         syscall
+
+         mov rax, 0x02000001
+         mov rdi,0
+         syscall
+
+        section .data
+message : db "amine"
+
+/*************************/
+void written(char *str);
+
+int main()
+{
+    written("hello wold");
+    return (0);
+}
+
+/*************************/
+_ft_write:
+        mov rax, 0x02000004 ; sys_write call identifier
+        mov rdi, 1  ;file descriptor (stdout)
+        mov rsi,  ;buffer
+        mov rdx,  ;length
+        syscall
+
+
+            global          _ft_strlen
+
+            section         .text
+
+    
+    _ft_strlen:     mov     rax, 0
+                    cmp     rdi,byte 0  ;compare the adrress with  NULL
+                    je      _NULL  ;if it equal to zero it will jumb to labe NULL to return (0)
+                   ; mov     rdi,rcx
+                    ;mov     cl,[rdi]
+                    cmp        [rdi],byte 0
+                    jne     _loop_count
+                    ret
+
+                    
+                   
+_loop_count:        
+
+; mov         rdi,rcx
+                    inc         rax
+                    inc         rdi
+                    ;mov         cl,[rdi]
+                    cmp          [rdi],byte 0
+                    jne        _loop_count
+                    ret 
+
+_NULL:              ret
